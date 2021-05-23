@@ -9,7 +9,10 @@ export const QUOTE_LENGTH_LIMIT = 110;
 @Injectable()
 export class QuoteService {
   async generateQuote(generateQuoteDto: GenerateQuoteDto) {
-    const browser = await puppeteer.launch({ headless: true });
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    });
     const page = await browser.newPage();
     await page.setViewport({
       height: 1920,
